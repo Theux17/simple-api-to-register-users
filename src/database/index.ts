@@ -1,6 +1,9 @@
 import mongoose from 'mongoose'
 
-mongoose.connect('mongodb+srv://api-users:yY1d6nKY9Erqdarx@cluster0.wrcvg.mongodb.net/data-users?retryWrites=true&w=majority', {
+import 'dotenv/config'
+
+const uri = process.env.MONGO_URI as string
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
