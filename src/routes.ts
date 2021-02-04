@@ -1,5 +1,12 @@
 import { Router } from 'express'
 
-const router = Router()
+import UserController from './controllers/UserController'
 
-export default router
+const routes = Router()
+
+routes.post('/users', UserController.create)
+routes.get('/users/:id', UserController.show)
+routes.put('/users/:id', UserController.update)
+routes.delete('/users/:id', UserController.delete)
+
+export default routes
