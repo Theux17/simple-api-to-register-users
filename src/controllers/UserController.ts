@@ -9,7 +9,6 @@ interface UserInterface {
     goal: String
 }
 
-
 export default {
     async create(req: Request, res: Response) {
         try {

@@ -1,12 +1,13 @@
 import { Router } from 'express'
 
 import UserController from './controllers/UserController'
+import UserValidator from './validators/user'
 
 const routes = Router()
 
-routes.post('/users', UserController.create)
-routes.get('/users/:id', UserController.show)
-routes.put('/users/:id', UserController.update)
-routes.delete('/users/:id', UserController.delete)
+routes.post('/users', UserValidator.user, UserController.create)
+routes.get('/users/:id', UserValidator.user, UserController.show)
+routes.put('/users/:id', UserValidator.user, UserController.update)
+routes.delete('/users/:id', UserValidator.user, UserController.delete)
 
 export default routes
