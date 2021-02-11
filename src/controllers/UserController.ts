@@ -1,12 +1,13 @@
 import { Request, Response } from 'express'
+import { Document } from 'mongoose'
 
 import User from '../models/User'
 
-interface UserInterface {
-    name: String
-    email: String
-    occupation: String
-    goal: String
+interface UserInterface extends Document {
+    name: string
+    email: string
+    occupation: string
+    goal: string
 }
 
 export default {
@@ -81,10 +82,12 @@ export default {
         try {
             const { id } = req.params
 
+            const user = await User.findById(id) as UserInterface
+
             await User.findByIdAndRemove(id)
 
             return res.json({
-                message: "User deleted successfully."
+                message: `User ${user.name} deleted successfully.`
             })
 
         } catch (error) {
