@@ -1,11 +1,16 @@
 import { Document } from 'mongoose'
 import mongoose from '../database/index'
 
+interface GoalInterface {
+    goal: string
+    userId: string
+}
+
 interface UserInterface extends Document {
     name: string
     email: string
     occupation: string
-    goal: string
+    goals: Array<GoalInterface>
 }
 
 const UserSchema = new mongoose.Schema({
@@ -23,10 +28,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    goal: {
-        type: String,
-        required: true
-    }
+    goals: [{
+        type: Object,
+        ref: 'Goal'
+    }]
 })
 
 UserSchema.set('timestamps', true)

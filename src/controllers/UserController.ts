@@ -3,11 +3,16 @@ import { Document } from 'mongoose'
 
 import User from '../models/User'
 
+interface GoalInterface {
+    goal: string
+    userId: string
+}
+
 interface UserInterface extends Document {
     name: string
     email: string
     occupation: string
-    goal: string
+    goals: Array<GoalInterface>
 }
 
 export default {
@@ -17,14 +22,12 @@ export default {
                 name,
                 email,
                 occupation,
-                goal
             }: UserInterface = req.body
 
             const user = await User.create({
                 name,
                 email,
-                occupation,
-                goal
+                occupation
             })
 
             return res.status(201).json({ user })
@@ -40,9 +43,9 @@ export default {
         try {
             const { id } = req.params
 
-            const user = await User.findById(id)
+            const user = await User.findById(id) as UserInterface
 
-            return res.json({ user })
+            return res.json(user)
 
         } catch (error) {
             return res.status(500).json({
@@ -58,15 +61,13 @@ export default {
             const {
                 name,
                 email,
-                occupation,
-                goal
+                occupation
             }: UserInterface = req.body
 
             const user = await User.findByIdAndUpdate(id, {
                 name,
                 email,
-                occupation,
-                goal
+                occupation
             }, { new: true })
 
             return res.json({ user })

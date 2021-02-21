@@ -6,7 +6,7 @@ interface UserInterface {
     name: string
     email: string
     occupation: string
-    goal: string
+    goals: Array<object>
 }
 
 async function user(req: Request, res: Response, next: NextFunction) {
@@ -14,7 +14,7 @@ async function user(req: Request, res: Response, next: NextFunction) {
     const email: string = req.body.email
 
     const user = await User.findById(id)
-    if (user && !user || user == null) return res.status(404).json({
+    if (user && user == null) return res.status(404).json({
         error: "User does not exist."
     })
 
