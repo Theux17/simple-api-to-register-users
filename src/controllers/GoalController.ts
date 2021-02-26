@@ -17,6 +17,20 @@ interface UserInterface extends Document {
 }
 
 export default {
+    async index(req: Request, res: Response) {
+        try {
+            const { userId } = req.params
+            
+            const user = await User.findById(userId) as UserInterface
+
+            return res.json({ goals: user.goals })
+        } catch (error) {
+            return res.status(500).json({
+                error: "Unexpected error while list the goals."
+            })
+        }
+    },
+
     async create(req: Request, res: Response) {
         try {
             const { userId } = req.params
