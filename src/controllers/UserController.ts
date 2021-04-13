@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { Document } from 'mongoose'
+import { sign } from 'jsonwebtoken'
 
 import User from '../models/User'
 
@@ -30,7 +31,11 @@ export default {
                 occupation
             })
 
-            return res.status(201).json({ user })
+            const token = sign({ id: user._id }, process.env.SECRET as string, {
+                expiresIn: '1d'
+            })
+
+            return res.status(201).json({ user, token })
 
         } catch (error) {
             return res.status(500).json({

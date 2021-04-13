@@ -12,7 +12,7 @@ import GolValidator from './validators/goal'
 const routes = Router()
 
 // session
-routes.post('/session', UserValidator.user, AuthController.create)
+routes.post('/session', AuthController.create)
 
 // users
 routes.post('/users', UserValidator.user, UserController.create)

@@ -8,8 +8,7 @@ interface Goal extends Document {
 
 const GoalSchema = new mongoose.Schema({
     goal: {
-        type: String,
-        unique: true
+        type: String
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,

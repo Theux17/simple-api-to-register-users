@@ -2,7 +2,6 @@ import { Request, Response } from 'express'
 import { sign } from 'jsonwebtoken'
 import { Document } from 'mongoose'
 
-
 import User from '../models/User'
 
 interface GoalInterface {
